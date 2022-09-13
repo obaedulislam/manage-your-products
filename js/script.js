@@ -18,7 +18,7 @@ const addProduct = () => {
     }
     setProductInLocalStorage(productName, productQuantity);
     displayProducts();
-    
+
     console.table(getLocalStorageData());
 }
 
@@ -39,7 +39,20 @@ const setProductInLocalStorage = (pName, pQuantity) => {
     if(!products){
         products = {};
     }
-    products[pName] = pQuantity;
+    if(pQuantity == 0) {
+        alert("Out Of Stock");
+    }
+    else if(pQuantity > 0){
+        if(products[pName]){
+            products[pName] =  parseInt(products[pName]) + parseInt(pQuantity);
+        }
+        else{
+            products[pName] = pQuantity;
+        }
+    }
+    else{
+        alert("Product Quantity should be greater or Eqaual 0");
+    }
 
     localStorage.setItem("allProduct", JSON.stringify(products) );
 }
@@ -56,7 +69,7 @@ const displayProducts = () =>{
         const div = document.createElement('div');
         div.innerHTML = `
             <div class="shadow-sm p-3 mb-2 bg-body rounded">
-            <span class="fs-4">${name}</span>
+            <span class="fs-5">${name}</span>
             <span>
                 Quantity:<small class="fw-bold">${quantity}</small>
             <span>
