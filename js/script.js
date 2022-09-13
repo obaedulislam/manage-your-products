@@ -19,13 +19,20 @@ const addProduct = () => {
     setProductInLocalStorage(productName, productQuantity)
 }
 
+//Get Data From Local Storage
+const getLocalStorageData = () => {
+    const products = localStorage.getItem("allProduct");
+    const productObject = JSON.parse(products);
+    return productObject;
+}
 
 // Set Data in Local Stoarge
 const setProductInLocalStorage = (pName, pQuantity) => {
-    const products = {
-        name: pName,
-        quantity: pQuantity
+    let products = getLocalStorageData();
+    if(!products){
+        products = {};
     }
-  
+    products[pName] = pQuantity;
+    console.log(products);
     localStorage.setItem("allProduct", JSON.stringify(products) );
 }
