@@ -16,6 +16,16 @@ const addProduct = () => {
         alert("Your Input is not Valid");
         return;
     }
-
+    setProductInLocalStorage(productName, productQuantity)
 }
 
+
+// Set Data in Local Stoarge
+const setProductInLocalStorage = (pName, pQuantity) => {
+    const products = {
+        name: pName,
+        quantity: pQuantity
+    }
+  
+    localStorage.setItem("allProduct", JSON.stringify(products) );
+}
